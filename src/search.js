@@ -18,7 +18,10 @@ export function SearchBar() {
     }
   });
 
-  console.log(data);
 
-  return <div>"hi shoot"</div>;
+
+  return <div>
+      <div className="search-label">Search</div>
+      <input type="input" className="search-input"></input>
+  </div>;
 }
