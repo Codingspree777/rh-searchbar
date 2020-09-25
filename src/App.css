@@ -22,6 +22,30 @@
   height: 30px;
 }
 
+.Table-Container{
+  margin-top: 15px;
+  width: 1000px;
+}
+
+.Table-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.Table {
+  display: flex;
+}
+
+.cell {
+  width: 215px;
+  height: 50px;
+  word-wrap: break-word;
+  font-size: 16px;
+}
+
+
+
+
 .App-link {
   color: #61dafb;
 }
