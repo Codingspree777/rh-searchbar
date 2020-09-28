@@ -4,13 +4,17 @@ import { Table } from './table';
 export function SearchBar() {
   const [status, setStatus] = useState('idle');
   const [data, setData] = useState();
+  const [doNotMutate, setOriginal] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       setStatus('fetching');
       await fetch('https://jsonplaceholder.typicode.com/users')
         .then(response => response.json())
-        .then(data => setData(data))
+        .then(data => {
+          setData(data)
+          setOriginal(data)
+        })
         .then(() => setStatus('fetched'))
         .catch(error => alert(error));
     };
@@ -19,13 +23,17 @@ export function SearchBar() {
 
   const search = (event) => {
     event.preventDefault();
-    const filtered = data.filter((el)=> {
-      return el.name.toLowerCase().includes(event.target.value.toLowerCase());
-    })
-  
    
+    const filtered = data.filter((el)=> {
+      if(!isNaN(event.target.value)) {
+        return el.phone.toLowerCase().includes(event.target.value.toLowerCase());
+      } else {
+        return el.name.toLowerCase().includes(event.target.value.toLowerCase());
+      }
+    })
+
    if(event.target.value === '') {
-    setData(data)
+    setData(doNotMutate)
    } else {
     setData(filtered);
    }
