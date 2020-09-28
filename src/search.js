@@ -17,12 +17,24 @@ export function SearchBar() {
     fetchData();
   }, []);
 
+  const search = (event) => {
+    event.preventDefault();
+    const filtered = data.filter((el)=> {
+      return el.name.toLowerCase().includes(event.target.value.toLowerCase());
+    })
   
+   
+   if(event.target.value === '') {
+    setData(data)
+   } else {
+    setData(filtered);
+   }
+  }
 
   return (
     <div>
       <div className='search-label'>Search</div>
-      <input type='input' className='search-input'></input>
+      <input onChange={search} type='input' className='search-input'></input>
       <Table data={data}/>
     </div>
   );
