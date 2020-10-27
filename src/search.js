@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Table } from './table';
 
 export function SearchBar() {
-  const [data, setData] = useState();
-  const [doNotMutate, setOriginal] = useState();
+  const [data, setData] = useState([]);
+  const [doNotMutate, setOriginal] = useState([]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,19 +24,18 @@ export function SearchBar() {
   }, []);
 
   const search = event => {
-    event.preventDefault();
-
+    let text = event.target.value;
     const filtered = data.filter(el => {
-      if (!isNaN(event.target.value)) {
+      if (!isNaN(text)) {
         return el.phone
           .toLowerCase()
-          .includes(event.target.value.toLowerCase());
+          .includes(text.toLowerCase());
       } else {
-        return el.name.toLowerCase().includes(event.target.value.toLowerCase());
+        return el.name.toLowerCase().includes(text.toLowerCase());
       }
     });
 
-    if (event.target.value === '') {
+    if (text === '') {
       setData(doNotMutate);
     } else {
       setData(filtered);
