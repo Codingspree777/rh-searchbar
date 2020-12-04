@@ -12,10 +12,10 @@ export function SearchBar({ searchData }) {
     let text = event.target.value;
 
     const filtered = data.filter(el => {
-      if (!isNaN(text)) {
-        return el.phone.toLowerCase().includes(text.toLowerCase());
-      } else {
+      if (isNaN(text)) {
         return el.name.toLowerCase().includes(text.toLowerCase());
+      } else {
+        return el.phone.toLowerCase().includes(text.toLowerCase());
       }
     });
 
